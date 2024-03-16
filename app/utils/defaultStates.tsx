@@ -1,4 +1,4 @@
-const defaultCities = [
+const defaultStates = [
   {
     name: 'Vancouver',
     country: 'Canada',
@@ -22,4 +22,4 @@ const defaultCities = [
   },
 ]
 
-export default defaultCities
+export default defaultStates
