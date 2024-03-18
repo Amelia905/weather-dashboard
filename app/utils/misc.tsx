@@ -53,3 +53,7 @@ export const unixToTime = (unix: number, timezone: number) => {
     .utcOffset(timezone / 60)
     .format('HH:mm A')
 }
+
+export const unixToDay = (unix: number) => {
+  return moment.unix(unix).format('ddd')
+}

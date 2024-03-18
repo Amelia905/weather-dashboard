@@ -82,3 +82,13 @@
     rgba(148, 187, 233, 1) 100%
   );
 }
+
+.temperature {
+  background-image: linear-gradient(
+    to right,
+    rgb(13, 64, 126) 0%,
+    rgb(111, 143, 179) 20%,
+    rgb(234, 232, 121) 50%,
+    rgb(238, 157, 27)
+  );
+}
