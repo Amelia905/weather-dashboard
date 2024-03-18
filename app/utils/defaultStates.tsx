@@ -1,24 +1,24 @@
 const defaultStates = [
   {
-    name: 'Vancouver',
-    country: 'Canada',
-    state: 'British Columbia',
-    lat: 49.2827,
-    lon: 123.1207,
-  },
-  {
-    name: 'Toronto',
-    country: 'Canada',
-    city: 'Ontario',
-    lat: 43.6532,
-    lon: 79.3832,
+    name: 'Cancun',
+    country: 'Mexico',
+    state: 'Quintana Roo',
+    lat: 21.1619,
+    lon: -86.8515,
   },
   {
     name: 'Seattle',
     country: 'USA',
     state: 'Washington',
-    lat: 47.6061,
-    lon: 47.6061,
+    lat: 47.6062,
+    lon: -122.3321,
+  },
+  {
+    name: 'Paris',
+    country: 'France',
+    state: 'Île-de-France',
+    lat: 48.8566,
+    lon: 2.3522,
   },
 ]
 

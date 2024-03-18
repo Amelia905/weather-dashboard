@@ -92,3 +92,10 @@
     rgb(238, 157, 27)
   );
 }
+
+.search-list {
+  position: absolute;
+  background: white;
+  top: 62px;
+  z-index: 10;
+}
