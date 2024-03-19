@@ -25,7 +25,7 @@ function Visibility() {
   }
 
   return (
-    <div className='pt-6 pb-5 px-4 h-[12rem] border rounded-lg flex flex-col gap-8 shadow-sm'>
+    <div className='pt-6 pb-5 px-4 h-[12rem] border rounded-lg flex flex-col gap-8 shadow-sm justify-center'>
       <div className='top'>
         <h2 className='flex items-center gap-2 font-medium'>
           {eye} Visibility

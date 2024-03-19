@@ -55,6 +55,9 @@ const config = {
           foreground: 'hsl(var(--card-foreground))',
         },
       },
+      maxHeight: {
+        '610': '610px', // This adds a 'max-h-610' utility class
+      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',

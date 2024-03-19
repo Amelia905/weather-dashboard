@@ -11,6 +11,7 @@ import {
 } from '@/app/utils/Icons'
 import { kelvinToCelsius } from '@/app/utils/misc'
 import moment from 'moment'
+import { Skeleton } from '@/components/ui/skeleton'
 
 function Temperature() {
   // State
@@ -43,7 +44,11 @@ function Temperature() {
 
   // If forecast or weather is not present, show loading
   if (!forecast || !weather) {
-    return <div>Loading...</div>
+    return (
+      <Skeleton className='h-[12rem] w-full col-span-full sm-2:col-span-2 md:col-span-2 xl:col-span-3 flex items-center justify-center'>
+        <p className='text-300 items-center'>Loading</p>
+      </Skeleton>
+    )
   }
 
   const temp = kelvinToCelsius(main?.temp)

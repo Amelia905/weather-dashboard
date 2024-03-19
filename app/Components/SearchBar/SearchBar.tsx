@@ -6,7 +6,7 @@ import {
   useGlobalContext,
   useGlobalContextUpdate,
 } from '@/app/context/globalContext'
-import { CommandList } from 'cmdk'
+import { CommandEmpty, CommandList } from 'cmdk'
 
 function SearchBar() {
   const { geoCodedList, inputValue, handleInput } = useGlobalContext()
@@ -21,7 +21,15 @@ function SearchBar() {
     setActiveCityCoords([lat, lon])
   }
 
-  const [isFocused, setIsFocused] = useState(false)
+  const [isInputFocused, setIsInputFocused] = useState(false)
+
+  const closeSuggestions = () => {
+    // Delay hiding the suggestion list by wrapping it in a setTimeout.
+    // This delay ensures that the click event on the suggestions can be processed.
+    setTimeout(() => {
+      setIsInputFocused(false)
+    }, 400) // 100ms delay should be sufficient, but you can adjust the timing as necessary
+  }
 
   return (
     <div className='search-btn'>
@@ -30,16 +38,12 @@ function SearchBar() {
           placeholder='Search...'
           value={inputValue}
           onChangeCapture={handleInput}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          onFocus={() => setIsInputFocused(true)}
+          onBlur={closeSuggestions}
         />
-        {isFocused && (
-          <ul className='search-list px-3 pb-2'>
-            <p className='p-2 text-sm text-muted-foreground'>Suggestions</p>
-
-            {geoCodedList?.length === 0 || (!geoCodedList && <p>No Results</p>)}
-
-            {geoCodedList &&
+        {isInputFocused && (
+          <CommandList className='search-list rounded-lg border'>
+            {geoCodedList.length > 0 ? (
               geoCodedList.map(
                 (
                   item: {
@@ -56,26 +60,37 @@ function SearchBar() {
                     <li
                       key={index}
                       onMouseEnter={() => setHoveredIndex(index)}
-                      className={`py-3 px-2 text-sm  rounded-sm cursor-default
-                          ${hoveredIndex === index ? 'bg-accent' : ''}
-                        `}
+                      className={`py-3 px-2 text-sm rounded-sm cursor-pointer ${
+                        hoveredIndex === index ? 'bg-accent' : ''
+                      }`}
                       onClick={() => {
                         getClickedCoords(item.lat, item.lon)
                       }}
                     >
-                      <p className=' text'>
-                        {name}, {state && state + ','} {country}
+                      <p className='text'>
+                        {name}, {state && `${state}, `}
+                        {country}
                       </p>
                     </li>
                   )
                 }
-              )}
-          </ul>
+              )
+            ) : (
+              // Show this when there are no search results
+              <CommandEmpty>
+                <p className='p-2 text-sm text-muted-foreground'>
+                  No results found.
+                </p>
+              </CommandEmpty>
+            )}
+          </CommandList>
         )}
-        <CommandList></CommandList>
       </Command>
     </div>
   )
 }
 
 export default SearchBar
+function setIsInputFocused(arg0: boolean) {
+  throw new Error('Function not implemented.')
+}

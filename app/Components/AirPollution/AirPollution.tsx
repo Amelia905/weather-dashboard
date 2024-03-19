@@ -17,7 +17,11 @@ function AirPollution() {
     !airQuality.list[0] ||
     !airQuality.list[0].main
   ) {
-    return <Skeleton className='h-[12rem] w-full col-span-2 md:col-span-full' />
+    return (
+      <Skeleton className='h-[12rem] w-full col-span-full sm-2:col-span-2 md:col-span-2 xl:col-span-3 flex items-center justify-center'>
+        <p className='text-300 items-center'>Loading</p>
+      </Skeleton>
+    )
   }
 
   const airQualityIndex = airQuality.list[0].main.aqi * 10
@@ -26,7 +30,7 @@ function AirPollution() {
     return item.rating === airQualityIndex
   })
   return (
-    <div className='air-pollution col-span-full sm-2:col-span-2 pt-6 px-4 h-[12rem] border rounded-lg flex-col flex gap-8 shadow-sm'>
+    <div className='air-pollution pt-6 px-4 h-[12rem] border rounded-lg flex flex-col gap-8 shadow-sm col-span-full sm-2:col-span-2 md:col-span-2 xl:col-span-2'>
       <h2 className='flex items-center gap-2 font-medium'>
         {thermo}Air Pollution
       </h2>

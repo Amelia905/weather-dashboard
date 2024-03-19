@@ -40,7 +40,9 @@ function DailyForecast() {
 
   if (todaysForecast.length < 1) {
     return (
-      <Skeleton className='h-[12rem] w-full col-span-full sm-2:col-span-2 md:col-span-2 xl:col-span-2' />
+      <Skeleton className='h-[12rem] w-full col-span-full sm-2:col-span-2 md:col-span-2 xl:col-span-3 flex items-center justify-center'>
+        <p className='text-300 items-center'>Loading</p>
+      </Skeleton>
     )
   }
 
@@ -62,7 +64,7 @@ function DailyForecast() {
   }
 
   return (
-    <div className='pt-6 px-4 h-[12rem] border rounded-lg flex flex-col gap-8 shadow-sm col-span-full sm-2:col-span-2 md:col-span-2 xl:col-span-2'>
+    <div className='pt-6 px-4 h-[12rem] border rounded-lg flex flex-col gap-8 shadow-sm w-full col-span-full sm-2:col-span-2 md:col-span-2 xl:col-span-3'>
       <div className='h-full flex gap-10 overflow-hidden'>
         {todaysForecast.length < 1 ? (
           <div className='flex justify-center items-center'>
@@ -81,7 +83,7 @@ function DailyForecast() {
                         key={forecast.dt_txt}
                         className='flex flex-col gap-4 basis-[8.5rem] cursor-grab'
                       >
-                        <p className=' text-300'>
+                        <p className='text-300'>
                           {moment(forecast.dt_txt).format('HH:mm')}
                         </p>
                         <p>{getIcon()}</p>

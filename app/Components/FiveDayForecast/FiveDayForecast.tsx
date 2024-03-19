@@ -49,10 +49,7 @@ function FiveDayForecast() {
   }
 
   return (
-    <div
-      className='pt-6 pb-5 px-4 flex-1 border rounded-lg flex flex-col
-        justify-between shadow-sm'
-    >
+    <div className='pt-6 pb-5 px-4 flex-1 border rounded-lg flex flex-col justify-between shadow-sm max-h-610'>
       <div>
         <h2 className='flex items-center gap-2 font-medium'>
           {calender} 5-Day Forecast for {city.name}

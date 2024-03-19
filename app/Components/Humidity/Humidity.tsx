@@ -8,7 +8,11 @@ function Humidity() {
   const { forecast } = useGlobalContext()
 
   if (!forecast || !forecast?.main || !forecast?.main?.humidity) {
-    return <Skeleton className='h-[12rem] w-full' />
+    return (
+      <Skeleton className='h-[12rem] w-full col-span-full sm-2:col-span-2 md:col-span-2 xl:col-span-3 flex items-center justify-center'>
+        <p className='text-300 items-center'>Loading</p>
+      </Skeleton>
+    )
   }
 
   const { humidity } = forecast?.main

@@ -20,6 +20,27 @@ const defaultStates = [
     lat: 48.8566,
     lon: 2.3522,
   },
+  {
+    name: 'Chengdu',
+    country: 'China',
+    state: 'Sichuan',
+    lat: 30.5728,
+    lon: 104.0668,
+  },
+  {
+    name: 'Los Angeles',
+    country: 'USA',
+    state: 'California',
+    lat: 34.0522,
+    lon: -118.2437,
+  },
+  {
+    name: 'Sydney',
+    country: 'Australia',
+    state: 'New South Wales',
+    lat: -33.8688,
+    lon: 151.2093,
+  },
 ]
 
 export default defaultStates
