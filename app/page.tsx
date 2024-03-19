@@ -21,6 +21,13 @@ import Pressure from './Components/Pressure/Pressure'
 // Importing utility for default city states.
 import defaultStates from './utils/defaultStates'
 
+// lazy loading the mapbox
+import dynamic from 'next/dynamic'
+
+const DynamicMap = dynamic(() => import('./Components/MapBox/MapBox'), {
+  ssr: false,
+})
+
 export default function Home() {
   // Accesses the function to update active city coordinates within global context.
   const { setActiveCityCoords } = useGlobalContextUpdate()
@@ -62,7 +69,7 @@ export default function Home() {
             <Pressure />
           </div>
           <div className='mapbox-con mt-4 flex gap-4'>
-            <MapBox />
+            <DynamicMap />
             <div className='states flex flex-col gap-3 flex-1'>
               <h2 className='flex items-center gap-2 font-medium'>
                 Top Cities
