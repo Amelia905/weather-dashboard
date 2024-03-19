@@ -5,7 +5,9 @@ import { kelvinToCelsius, unixToDay } from '@/app/utils/misc'
 import { Skeleton } from '@/components/ui/skeleton'
 import React from 'react'
 
+// Component to display a 5-day weather forecast.
 function FiveDayForecast() {
+  // Retrieve 5-day forecast data from global context.
   const { fiveDayForecast } = useGlobalContext()
 
   const { city, list } = fiveDayForecast
@@ -14,6 +16,7 @@ function FiveDayForecast() {
     return <Skeleton className='h-[12rem] w-full' />
   }
 
+  // Process daily forecast data to determine min and max temperatures.
   const processData = (
     dailyData: {
       main: { temp_min: number; temp_max: number }
@@ -35,19 +38,25 @@ function FiveDayForecast() {
     )
 
     return {
+      // Convert first day's timestamp to day of the week.
       day: unixToDay(dailyData[0].dt),
+      // Convert temperature to Celsius.
       minTemp: kelvinToCelsius(minTemp),
       maxTemp: kelvinToCelsius(maxTemp),
     }
   }
 
+  // Aggregate daily forecasts into an array for rendering.
   const dailyForecasts = []
 
   for (let i = 0; i < 40; i += 8) {
+    // Slice forecast data to daily segments.
     const dailyData = list.slice(i, i + 5)
+    // Process and store the daily forecast data.
     dailyForecasts.push(processData(dailyData))
   }
 
+  // Render the 5-day forecast component with processed data.
   return (
     <div className='pt-6 pb-5 px-4 flex-1 border rounded-lg flex flex-col justify-between shadow-sm max-h-610'>
       <div>

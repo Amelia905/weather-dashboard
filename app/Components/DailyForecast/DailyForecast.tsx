@@ -1,5 +1,6 @@
+// This component is executed only on the client side
 'use client'
-
+// Import necessary modules and components.
 import React from 'react'
 import { useGlobalContext } from '@/app/context/globalContext'
 import { clearSky, cloudy, drizzleIcon, rain, snow } from '@/app/utils/Icons'
@@ -13,11 +14,14 @@ import moment from 'moment'
 import { kelvinToCelsius } from '@/app/utils/misc'
 
 function DailyForecast() {
+  // Destructure forecast data from global context.
   const { forecast, fiveDayForecast } = useGlobalContext()
 
+  // Destructure detailed weather and location/city information.
   const { weather } = forecast
   const { city, list } = fiveDayForecast
 
+  // Display a skeleton loader if forecast data is not fully loaded or available.
   if (!fiveDayForecast || !city || !list) {
     return <Skeleton className='h-[12rem] w-full' />
   }
@@ -26,16 +30,18 @@ function DailyForecast() {
     return <Skeleton className='h-[12rem] w-full' />
   }
 
+  // Determine today's date as a string to filter today's forecasts.
   const today = new Date()
   const todayString = today.toISOString().split('T')[0]
 
-  //filter the list for today's forecast
+  // Filter the list to get only today's forecasts based on the date.
   const todaysForecast = list.filter(
     (forecast: { dt_txt: string; main: { temp: number } }) => {
       return forecast.dt_txt.startsWith(todayString)
     }
   )
 
+  // Determine the main weather condition for the first item in the weather array.
   const { main: weatherMain } = weather[0]
 
   if (todaysForecast.length < 1) {
@@ -46,6 +52,7 @@ function DailyForecast() {
     )
   }
 
+  // Function to select the appropriate icon based on the main weather condition.
   const getIcon = () => {
     switch (weatherMain) {
       case 'Drizzle':
@@ -63,6 +70,7 @@ function DailyForecast() {
     }
   }
 
+  // Render the component with a carousel of today's forecast times, icons, and temperatures.
   return (
     <div className='pt-6 px-4 h-[12rem] border rounded-lg flex flex-col gap-8 shadow-sm w-full col-span-full sm-2:col-span-2 md:col-span-2 xl:col-span-3'>
       <div className='h-full flex gap-10 overflow-hidden'>

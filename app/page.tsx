@@ -1,5 +1,9 @@
+// Directive to ensure this component runs only on the client side for Next.js optimization.
 'use client'
-import Image from 'next/image'
+// Custom hook to access the global context updater function.
+import { useGlobalContextUpdate } from './context/globalContext'
+
+// Importing UI components for various weather information displays.
 import AirPollution from './Components/AirPollution/AirPollution'
 import DailyForecast from './Components/DailyForecast/DailyForecast'
 import FeelsLike from './Components/FeelsLike/FeelsLike'
@@ -10,24 +14,29 @@ import Temperature from './Components/Temperature/Temperature'
 import UvIndex from './Components/UvIndex/UvIndex'
 import Visibility from './Components/Visibility/Visibility'
 import Wind from './Components/Wind/Wind'
-import defaultStates from './utils/defaultStates'
 import FiveDayForecast from './Components/FiveDayForecast/FiveDayForecast'
-import { useGlobalContextUpdate } from './context/globalContext'
 import MapBox from './Components/MapBox/MapBox'
 import Pressure from './Components/Pressure/Pressure'
 
+// Importing utility for default city states.
+import defaultStates from './utils/defaultStates'
+
 export default function Home() {
+  // Accesses the function to update active city coordinates within global context.
   const { setActiveCityCoords } = useGlobalContextUpdate()
 
+  // Update the active city coordinates and scroll to the top of the page.
   const getClickedCityCords = (lat: number, lon: number) => {
     setActiveCityCoords([lat, lon])
 
+    // Smoothly scrolls to the top of the page.
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
     })
   }
 
+  // Renders the home page layout.
   return (
     <main className='mx-[1rem] lg:mx-[2rem] xl:mx-[6rem] 2xl:mx-[16rem] m-auto'>
       <Navbar />

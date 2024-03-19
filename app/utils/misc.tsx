@@ -1,9 +1,12 @@
+// Import moment.js library for date and time manipulation.
 import moment from 'moment'
 
+// Converts temperature from Kelvin to Celsius by subtracting 273.15 and rounding the result.
 export const kelvinToCelsius = (kelvin: number) => {
   return Math.round(kelvin - 273.15)
 }
 
+// An array that maps air quality index ratings to descriptive text.
 export const airQualityIndexText = [
   {
     rating: 10,
@@ -47,6 +50,9 @@ export const airQualityIndexText = [
   },
 ]
 
+// Converts a Unix timestamp to a formatted time string based on a specified timezone.
+// The timezone is converted from seconds to hours for `utcOffset`.
+// The time is formatted in 24-hour format with AM/PM indicator.
 export const unixToTime = (unix: number, timezone: number) => {
   return moment
     .unix(unix)
@@ -54,6 +60,7 @@ export const unixToTime = (unix: number, timezone: number) => {
     .format('HH:mm A')
 }
 
+// Converts a Unix timestamp to a string representing the day of the week (e.g., "Mon").
 export const unixToDay = (unix: number) => {
   return moment.unix(unix).format('ddd')
 }

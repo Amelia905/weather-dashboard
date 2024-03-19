@@ -9,28 +9,31 @@ import {
 import { CommandEmpty, CommandList } from 'cmdk'
 
 function SearchBar() {
+  // Retrieves values and functions from global context to manage input and suggestions.
   const { geoCodedList, inputValue, handleInput } = useGlobalContext()
 
-  // update the state when we get the input value
+  // Retrieves function from global context to update active city coordinates.
   const { setActiveCityCoords } = useGlobalContextUpdate()
 
+  // Track the currently hovered item in the suggestion list.
   const [hoveredIndex, setHoveredIndex] = React.useState<number>(0)
 
-  // get the clicked coordinates value
+  // Get the clicked coordinates value
   const getClickedCoords = (lat: number, lon: number) => {
     setActiveCityCoords([lat, lon])
   }
 
+  // Manage the visibility of the suggestion list.
   const [isInputFocused, setIsInputFocused] = useState(false)
 
+  // Hide the suggestion list, with a delay to allow click events to be processed.
   const closeSuggestions = () => {
-    // Delay hiding the suggestion list by wrapping it in a setTimeout.
-    // This delay ensures that the click event on the suggestions can be processed.
     setTimeout(() => {
       setIsInputFocused(false)
-    }, 400) // 100ms delay should be sufficient, but you can adjust the timing as necessary
+    }, 400)
   }
 
+  // Renders the search bar with dynamic suggestions based on input.
   return (
     <div className='search-btn'>
       <Command className='rounded-lg border shadow-md'>

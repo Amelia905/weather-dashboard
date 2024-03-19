@@ -11,6 +11,7 @@ function Wind() {
   const windSpeed = forecast?.wind?.speed
   const windDir = forecast?.wind?.deg
 
+  // Extracts wind speed and direction from the forecast data.
   if (!windSpeed || !windDir) {
     return (
       <Skeleton className='h-[12rem] w-full col-span-full sm-2:col-span-2 md:col-span-2 xl:col-span-3 flex items-center justify-center'>
@@ -28,12 +29,14 @@ function Wind() {
 
       <div className='compass relative flex items-center justify-center'>
         <div className='image relative'>
+          {/* Displays the compass body image. */}
           <Image
             src='/compass_body.svg'
             alt='compass'
             width={110}
             height={110}
           />
+          {/* Displays the compass arrow image, rotated according to wind direction. */}
           <Image
             src='/compass_arrow.svg'
             alt='compass'

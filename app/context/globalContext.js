@@ -1,24 +1,29 @@
+// Ensures this component runs only on the client side for Next.js optimization.
 'use client'
+
+// Import statements for necessary libraries and hooks.
 import axios from 'axios'
 import React, { useContext, createContext, useState, useEffect } from 'react'
 import defaultStates from '../utils/defaultStates'
-
 import { debounce } from 'lodash'
 
+// Create contexts for global state and its updater.
 const GlobalContext = createContext()
 const GlobalContextUpdate = createContext()
 
+// Define the provider component for the global context.
 export const GlobalContextProvider = ({ children }) => {
   const [forecast, setForecast] = useState({})
   const [geoCodedList, setGeoCodedList] = useState(defaultStates)
   const [inputValue, setInputValue] = useState('')
 
-  const [activeCityCoords, setActiveCityCoords] = useState([49.2827, -123.1207])
+  const [activeCityCoords, setActiveCityCoords] = useState([49.2827, -123.1207]) // Default set to Vancouver, BC
 
   const [airQuality, setAirQuality] = useState({})
   const [fiveDayForecast, setFiveDayForecast] = useState({})
   const [uvIndex, seUvIndex] = useState({})
 
+  // Fetches the current weather forecast based on latitude and longitude.
   const fetchForecast = async (lat, lon) => {
     try {
       const res = await axios.get(`api/weather?lat=${lat}&lon=${lon}`)
@@ -29,7 +34,7 @@ export const GlobalContextProvider = ({ children }) => {
     }
   }
 
-  // Air Quality
+  // Fetches air quality data.
   const fetchAirQuality = async (lat, lon) => {
     try {
       const res = await axios.get(`api/pollution?lat=${lat}&lon=${lon}`)
@@ -39,7 +44,7 @@ export const GlobalContextProvider = ({ children }) => {
     }
   }
 
-  // five day forecast
+  // Five day forecast
   const fetchFiveDayForecast = async (lat, lon) => {
     try {
       const res = await axios.get(`api/fiveday?lat=${lat}&lon=${lon}`)
@@ -50,7 +55,7 @@ export const GlobalContextProvider = ({ children }) => {
     }
   }
 
-  //geocoded list
+  // Fetches a list of locations based on a search query.
   const fetchGeoCodedList = async (search) => {
     try {
       const res = await axios.get(`/api/geocoded?search=${search}`)
@@ -60,7 +65,7 @@ export const GlobalContextProvider = ({ children }) => {
     }
   }
 
-  //fetch uv data
+  // Fetch uv data
   const fetchUvIndex = async (lat, lon) => {
     try {
       const res = await axios.get(`/api/uv?lat=${lat}&lon=${lon}`)
@@ -71,7 +76,7 @@ export const GlobalContextProvider = ({ children }) => {
     }
   }
 
-  // handle input
+  // Handle user input in the search bar and fetches geocoded list accordingly
   const handleInput = (e) => {
     setInputValue(e.target.value)
 
@@ -80,7 +85,7 @@ export const GlobalContextProvider = ({ children }) => {
     }
   }
 
-  // debounce function, put delay  every time input changes in the search
+  // Debounce function, put delay  every time input changes in the search
   useEffect(() => {
     const debouncedFetch = debounce((search) => {
       fetchGeoCodedList(search)
@@ -90,16 +95,17 @@ export const GlobalContextProvider = ({ children }) => {
       debouncedFetch(inputValue)
     }
 
-    // cleanup
+    // Cleanup
     return () => debouncedFetch.cancel()
   }, [inputValue])
 
+  // Fetches all data related to the active city coordinates when they change.
   useEffect(() => {
     fetchForecast(activeCityCoords[0], activeCityCoords[1])
     fetchAirQuality(activeCityCoords[0], activeCityCoords[1])
     fetchFiveDayForecast(activeCityCoords[0], activeCityCoords[1])
     fetchUvIndex(activeCityCoords[0], activeCityCoords[1])
-  }, [activeCityCoords])
+  }, [activeCityCoords]) // Fetch calls for forecast, air quality, five-day forecast, and UV index.
 
   return (
     <GlobalContext.Provider
@@ -125,5 +131,6 @@ export const GlobalContextProvider = ({ children }) => {
   )
 }
 
+// Custom hooks to easily use global context and its updater in components.
 export const useGlobalContext = () => useContext(GlobalContext)
 export const useGlobalContextUpdate = () => useContext(GlobalContextUpdate)

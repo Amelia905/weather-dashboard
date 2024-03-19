@@ -9,12 +9,13 @@ import {
   rain,
   snow,
 } from '@/app/utils/Icons'
+// Utility function for temperature conversion.
 import { kelvinToCelsius } from '@/app/utils/misc'
 import moment from 'moment'
 import { Skeleton } from '@/components/ui/skeleton'
 
 function Temperature() {
-  // State
+  // State for managing formatted local time and current day.
   const [localTime, setLocalTime] = useState<string>('')
   const [currentDay, setCurrentDay] = useState<string>('')
 
@@ -23,6 +24,7 @@ function Temperature() {
   // Ensure forecast has the necessary data before destructuring
   const { main, timezone, name, weather } = forecast || {}
 
+  // Effect hook to update local time and current day every second based on the timezone.
   useEffect(() => {
     if (timezone) {
       // Update time every second
@@ -33,6 +35,7 @@ function Temperature() {
         // Day of the week
         const day = localMoment.format('dddd')
 
+        // Updates local state with formatted time and day.
         setLocalTime(formattedTime)
         setCurrentDay(day)
       }, 1000)
@@ -42,7 +45,6 @@ function Temperature() {
     }
   }, [timezone])
 
-  // If forecast or weather is not present, show loading
   if (!forecast || !weather) {
     return (
       <Skeleton className='h-[12rem] w-full col-span-full sm-2:col-span-2 md:col-span-2 xl:col-span-3 flex items-center justify-center'>
@@ -51,11 +53,13 @@ function Temperature() {
     )
   }
 
+  // Converts temperatures from Kelvin to Celsius for display.
   const temp = kelvinToCelsius(main?.temp)
   const minTemp = kelvinToCelsius(main?.temp_min)
   const maxTemp = kelvinToCelsius(main?.temp_max)
-  const { main: weatherMain, description } = weather[0]
+  const { main: weatherMain, description } = weather[0] // Extracts main weather condition and description.
 
+  // Function to determine the appropriate icon based on the main weather condition.
   const getIcon = () => {
     switch (weatherMain) {
       case 'Drizzle':

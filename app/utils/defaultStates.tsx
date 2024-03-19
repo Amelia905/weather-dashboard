@@ -1,3 +1,7 @@
+// Defines a list of default geographic locations.
+
+// Each object in the array represents a specific location with its name, country, state (or region), and geographic coordinates (latitude and longitude).
+
 const defaultStates = [
   {
     name: 'Cancun',

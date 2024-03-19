@@ -4,6 +4,7 @@ import { gauge } from '@/app/utils/Icons'
 import { Skeleton } from '@/components/ui/skeleton'
 import React from 'react'
 
+// Component to display atmospheric pressure information.
 function Pressure() {
   const { forecast } = useGlobalContext()
 
@@ -13,25 +14,20 @@ function Pressure() {
 
   const { pressure } = forecast?.main
 
+  // Function to categorize pressure levels into human-readable descriptions.
   const getPressureDescription = (pressure: number) => {
     if (pressure < 1000) return 'Very low pressure'
-
-    if (pressure >= 1000 && pressure < 1015)
-      return 'Low pressure. Expect weather changes.'
-
-    if (pressure >= 1015 && pressure < 1025)
-      return 'Normal pressure. Expect weather changes.'
-
-    if (pressure >= 1025 && pressure < 1040)
-      return 'High pressure. Expect weather changes.'
-
-    if (pressure >= 1040) return 'Very high pressure. Expect weather changes.'
+    else if (pressure >= 1000 && pressure < 1015) return 'Low pressure'
+    else if (pressure >= 1015 && pressure < 1025) return 'Normal pressure'
+    else if (pressure >= 1025 && pressure < 1040) return 'High pressure'
+    else if (pressure >= 1040) return 'Very high pressure'
 
     return 'Unavailable pressure data'
   }
 
+  // Renders the pressure component with descriptive text based on the current pressure level.
   return (
-    <div className='pt-6 pb-5 px-4 h-[12rem] border rounded-lg flex flex-col gap-8 shadow-sm justify-center'>
+    <div className='pt-6 pb-5 px-4 h-[12rem] border rounded-lg flex flex-col gap-8 shadow-sm'>
       <div className='top'>
         <h2 className='flex items-center gap-2 font-medium'>
           {gauge} Pressure

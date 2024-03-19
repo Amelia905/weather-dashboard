@@ -1,3 +1,4 @@
+// Import statements for types, fonts, and CSS.
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -10,8 +11,7 @@ export const metadata: Metadata = {
   description: 'A weather app built with Next.js and TailwindCSS',
 }
 
-// The RootLayout component now uses ContextProvider to wrap the children.
-// This will provide the global context to all child components within the app.
+// wraps the entire application and provides a structured layout and injects global contexts and styles.
 export default function RootLayout({
   children,
 }: Readonly<{

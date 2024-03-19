@@ -14,7 +14,9 @@ function Visibility() {
 
   const { visibility } = forecast
 
+  // Convert visibility in meters to a descriptive text.
   const getVisibilityDescription = (visibility: number) => {
+    // Converts visibility from meters to kilometers.
     const visibilityInKm = Math.round(visibility / 1000)
 
     if (visibilityInKm > 10) return 'Excellent: Clear and vast view'

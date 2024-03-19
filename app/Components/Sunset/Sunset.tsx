@@ -14,8 +14,11 @@ function Sunset() {
   const times = forecast?.sys.sunset
   const timezone = forecast?.timezone
 
-  const sunsetTime = unixToTime(times, timezone)
+  // Extracts sunset and sunrise times from the forecast data.
+  const sunsetTime = unixToTime(times, timezone) // Converts sunset & sunrise Unix timestamp.
   const sunrise = unixToTime(forecast?.sys?.sunrise, timezone)
+
+  // Renders the component, displaying the sunset and sunrise times.
   return (
     <div className='pt-6 px-4 h-[12rem] border rounded-lg flex-col flex gap-8 shadow-sm'>
       <div className='top'>

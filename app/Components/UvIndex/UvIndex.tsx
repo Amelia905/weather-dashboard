@@ -17,11 +17,14 @@ function UvIndex() {
     )
   }
 
+  // Destructure daily UV index data, including max values.
   const { daily } = uvIndex
-  const { uv_index_clear_sky_max, uv_index_max } = daily
+  const { uv_index_max } = daily
 
+  // Formats the maximum UV index value for display.
   const uvIndexMax = uv_index_max[0].toFixed(0)
 
+  // Categorize UV index levels into descriptive text and protection advice.
   const uvIndexCategory = (uvIndex: number) => {
     if (uvIndex <= 2) {
       return {
@@ -56,6 +59,7 @@ function UvIndex() {
     }
   }
 
+  // Calculates margin left percentage for the UV Progress component based on the max UV index.
   const marginLeftPercentage = (uvIndexMax / 14) * 100
 
   return (
