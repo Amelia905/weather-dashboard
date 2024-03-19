@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Weather Dashboard
+
+A weather dashboard application built with Next.js and TailwindCSS, showcasing current weather, air quality, UV index, and a five-day forecast for locations worldwide. This project leverages the OpenWeatherMap API for weather data.
+
+## Features
+
+- Current weather conditions
+- Air quality index
+- UV index
+- Five-day weather forecast
+- Dynamic search for global locations
+- Responsive design
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (LTS version)
+- npm or yarn (package manager)
+
+### Setup Instructions
+
+1. **Clone the repository**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+   `git clone https://github.com/Amelia905/weather-dashboard.git
+   cd weather-dashboard
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install dependencies**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Using npm:
+npm install
+# or using yarn:
+yarn install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. **Obtain an API Key from OpenWeatherMap**
 
-## Learn More
+Visit OpenWeatherMap and sign up for an account.
 
-To learn more about Next.js, take a look at the following resources:
+Navigate to the API section and subscribe to the desired API services (e.g., Current Weather Data, Air Pollution API, etc.).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Copy your API key from the API keys section of your account.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+4. **Configure the API Key**
 
-## Deploy on Vercel
+Create a `.env` file in the root directory of your project and add your API key:
+OPENWEATHER_API_KEY=c5e49bc115a7f181726c1776f1275a53
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. **Run the application**
+   `npm run dev` or `yarn dev`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   Visit http://localhost:3000 in your browser to view the application.
+
+## Testing
+
+This project includes basic unit tests for components using Jest and React Testing Library.
+To run the tests, execute:
+`npm test` or `yarn test`
+
+## Contributing
+
+Contributions to the Weather Dashboard project are welcome. Please ensure to follow the established coding and documentation standards.
