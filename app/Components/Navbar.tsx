@@ -21,10 +21,12 @@ function Navbar() {
           <Button
             className='source-code-btn flex items-center gap-2'
             onClick={() => {
-              window.open(
-                'https://github.com/Amelia905/weather-dashboard',
-                '_blank'
-              )
+              if (typeof window !== 'undefined') {
+                window.open(
+                  'https://github.com/Amelia905/weather-dashboard',
+                  '_blank'
+                )
+              }
             }}
           >
             {github} Source Code

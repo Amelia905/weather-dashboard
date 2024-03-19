@@ -26,14 +26,18 @@ export default function Home() {
   const { setActiveCityCoords } = useGlobalContextUpdate()
 
   // Update the active city coordinates and scroll to the top of the page.
-  const getClickedCityCords = (lat: number, lon: number) => {
+  const getClickedCityCoords = (lat: number, lon: number) => {
     setActiveCityCoords([lat, lon])
 
     // Smoothly scrolls to the top of the page.
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
+    // Guarding the access to window
+    if (typeof window !== 'undefined') {
+      // Smoothly scrolls to the top of the page.
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
+    }
   }
 
   // Renders the home page layout.
@@ -70,7 +74,7 @@ export default function Home() {
                       key={index}
                       className='border rounded-lg cursor-pointer shadow-sm'
                       onClick={() => {
-                        getClickedCityCords(state.lat, state.lon)
+                        getClickedCityCoords(state.lat, state.lon)
                       }}
                     >
                       <p className='px-6 py-4'>{state.name}</p>
