@@ -8,12 +8,16 @@ export async function GET(req: NextRequest) {
     // retrieve the API key from environment variables
     const apiKey = process.env.OPENWEATHER_API_KEY
 
-    // extract search parameters from the request URL
-    const searchParams = req.nextUrl.searchParams
+    // extract latitude and longitude search parameters from the incoming request URL.
+    const lat = req.nextUrl.searchParams.get('lat')
+    const lon = req.nextUrl.searchParams.get('lon')
 
-    // extract latitude and longitude from search parameters
-    const lat = searchParams.get('lat')
-    const lon = searchParams.get('lon')
+    // Ensure lat and lon are present in the request query
+    if (!lat || !lon) {
+      return new Response('Latitude and longitude parameters are required.', {
+        status: 400,
+      })
+    }
 
     // construct the URL for the API request using the latitude, longitude, and API key
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`

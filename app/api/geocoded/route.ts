@@ -14,10 +14,9 @@ export async function GET(req: NextRequest) {
 
     // use axios to send a GET request to the URL and await the response
     const res = await axios.get(url)
-    // return the geocoded data from the response as a JSON object in the Next.js response.
+
     return NextResponse.json(res.data)
   } catch (error) {
-    // log any errors to the console for debugging.
     console.log('Error fetching geocoded data')
     return new Response('Error fetching geocoded data', { status: 500 })
   }

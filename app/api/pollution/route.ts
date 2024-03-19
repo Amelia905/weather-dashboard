@@ -9,9 +9,15 @@ export async function GET(req: NextRequest) {
     const apiKey = process.env.OPENWEATHER_API_KEY
 
     // extract latitude and longitude search parameters from the incoming request URL.
-    const searchParams = req.nextUrl.searchParams
-    const lat = searchParams.get('lat')
-    const lon = searchParams.get('lon')
+    const lat = req.nextUrl.searchParams.get('lat')
+    const lon = req.nextUrl.searchParams.get('lon')
+
+    // Ensure lat and lon are present in the request query
+    if (!lat || !lon) {
+      return new Response('Latitude and longitude parameters are required.', {
+        status: 400,
+      })
+    }
 
     const url = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`
 

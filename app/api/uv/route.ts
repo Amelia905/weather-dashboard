@@ -4,11 +4,16 @@ import { NextRequest, NextResponse } from 'next/server'
 // asynchronously handle GET requests to this API route
 export async function GET(req: NextRequest) {
   try {
-    // extract search parameters from the request URL
-    const searchParams = req.nextUrl.searchParams
-    // extract latitude and longitude from the search parameters
-    const lat = searchParams.get('lat')
-    const lon = searchParams.get('lon')
+    // extract latitude and longitude search parameters from the incoming request URL.
+    const lat = req.nextUrl.searchParams.get('lat')
+    const lon = req.nextUrl.searchParams.get('lon')
+
+    // Ensure lat and lon are present in the request query
+    if (!lat || !lon) {
+      return new Response('Latitude and longitude parameters are required.', {
+        status: 400,
+      })
+    }
 
     // construct the URL for the API request using the latitude, longitude, and specified parameters
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=uv_index_max,uv_index_clear_sky_max&timezone=auto&forecast_days=1`

@@ -8,12 +8,16 @@ export async function GET(req: NextRequest) {
   try {
     // retrieve api key from environment variables
     const apiKey = process.env.OPENWEATHER_API_KEY
-    // extract search parameters from the incoming request URL
-    const searchParams = req.nextUrl.searchParams
+    // extract latitude and longitude search parameters from the incoming request URL.
+    const lat = req.nextUrl.searchParams.get('lat')
+    const lon = req.nextUrl.searchParams.get('lon')
 
-    // extract latitude and longitude values from the search parameters to use in the API request
-    const lat = searchParams.get('lat')
-    const lon = searchParams.get('lon')
+    // Ensure lat and lon are present in the request query
+    if (!lat || !lon) {
+      return new Response('Latitude and longitude parameters are required.', {
+        status: 400,
+      })
+    }
 
     // construct the URL for fetching daily forecast data from the API using the latitude, longitude, and API key
     const dailyUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`
