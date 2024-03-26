@@ -37,7 +37,10 @@ function AirPollution() {
 
   // Render the component with air quality information.
   return (
-    <div className='air-pollution pt-6 px-4 h-[12rem] border rounded-lg flex flex-col gap-8 shadow-sm col-span-full sm-2:col-span-2 md:col-span-2 xl:col-span-2'>
+    <div
+      className='air-pollution pt-6 px-4 h-[12rem] border rounded-lg flex flex-col gap-8 shadow-sm col-span-full sm-2:col-span-2 md:col-span-2 xl:col-span-2'
+      data-testid='air-pollution-container'
+    >
       <h2 className='flex items-center gap-2 font-medium'>
         {thermo}Air Pollution
       </h2>

@@ -15,7 +15,6 @@ import UvIndex from './Components/UvIndex/UvIndex'
 import Visibility from './Components/Visibility/Visibility'
 import Wind from './Components/Wind/Wind'
 import FiveDayForecast from './Components/FiveDayForecast/FiveDayForecast'
-import MapBox from './Components/MapBox/MapBox'
 import Pressure from './Components/Pressure/Pressure'
 
 // Importing utility for default city states.
