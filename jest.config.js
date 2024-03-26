@@ -1,6 +1,10 @@
+// /Users/mine/Desktop/weather-dashboard/jest.config.js
 module.exports = {
   transform: {
-    '^.+\\.[t|j]sx?$': 'babel-jest',
+    '^.+\\.[t|j]sx?$': [
+      'babel-jest',
+      { configFile: './babel.jest.config.js' }, // Specify Jest-specific Babel config
+    ],
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   moduleNameMapper: {
